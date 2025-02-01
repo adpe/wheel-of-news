@@ -96,4 +96,5 @@ jobs:
           SERVER_USER: ${{ secrets.SSH_USER }}
         run: |
           set -e
+          chmod +x deploy.sh
           ./deploy.sh
