@@ -51,8 +51,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build with Maven
-        run: ./mvnw clean package -Pproduction -e
+      - name: Grant execute permissions to Maven Wrapper
+        run: chmod +x mvnw
 
       - name: Build with Maven
         run: ./mvnw clean package -Pproduction -e
