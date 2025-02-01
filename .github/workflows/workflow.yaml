@@ -74,7 +74,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile-app
+          file: ./Dockerfile
           push: true
           tags: adpe/wheel-of-news:latest
 
