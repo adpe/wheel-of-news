@@ -22,7 +22,7 @@ if [ "\$(docker ps -qa -f name=\$CONTAINER_NAME)" ]; then
     fi
 fi
 
-docker run -d --rm -p 8000:8000 --name \$CONTAINER_NAME \$IMAGE_NAME
+docker run -d --rm -p 9000:8080 --name \$CONTAINER_NAME \$IMAGE_NAME
 
 exit
 EOF
