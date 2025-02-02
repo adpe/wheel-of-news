@@ -4,17 +4,16 @@ on:
     branches: [ main ]
     paths:
       - 'src/**'
-      - '.github/workflows/workflow.yaml'
+      - '.github/workflows/workflow.yml'
   push:
     branches: [ main ]
     paths:
       - 'src/**'
-      - '.github/workflows/workflow.yaml'
+      - '.github/workflows/workflow.yml'
 
 jobs:
   project-build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -91,9 +90,9 @@ jobs:
           chmod 600 key.txt
       - name: Deploy the application
         env:
-          SERVER_HOST: ${{ secrets.SSH_HOST }}
-          SERVER_PORT: ${{ secrets.SSH_PORT }}
-          SERVER_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
           set -e
           chmod +x deploy.sh
