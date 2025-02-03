@@ -1,6 +1,7 @@
 #!/bin/bash
 IMAGE_NAME="adpe/wheel-of-news:latest"
-CONTAINER_NAME="wheel-of-news"
+CONTAINER_NAME_APP="wheel-of-news_app"
+CONTAINER_NAME_DB="wheel-of-news_db"
 
 start=$(date +"%s")
 
@@ -11,18 +12,19 @@ fi
 
 ssh -i key.txt -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" -o StrictHostKeyChecking=no << EOF
 IMAGE_NAME="$IMAGE_NAME"
-CONTAINER_NAME="$CONTAINER_NAME"
+CONTAINER_NAME_APP="$CONTAINER_NAME_APP"
+CONTAINER_NAME_DB="$CONTAINER_NAME_DB"
 
 docker pull \$IMAGE_NAME
 
-if [ "\$(docker ps -qa -f name=\$CONTAINER_NAME)" ]; then
-    if [ "\$(docker ps -q -f name=\$CONTAINER_NAME)" ]; then
+if [ "\$(docker ps -qa -f name=\$CONTAINER_NAME_APP)" ]; then
+    if [ "\$(docker ps -q -f name=\$CONTAINER_NAME_APP)" ]; then
         echo "Container is running -> stopping it..."
-        docker stop \$CONTAINER_NAME;
+        docker stop \$CONTAINER_NAME_APP;
     fi
 fi
 
-docker run -d --rm -p 9000:8080 --name \$CONTAINER_NAME \$IMAGE_NAME
+docker run -d --rm -p 9000:8080 --name \$CONTAINER_NAME_APP --volumes-from \$CONTAINER_NAME_DB \$IMAGE_NAME
 
 exit
 EOF
