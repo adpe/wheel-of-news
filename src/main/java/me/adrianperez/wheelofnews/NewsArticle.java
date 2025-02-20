@@ -2,13 +2,11 @@ package me.adrianperez.wheelofnews;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Entity
 public class NewsArticle {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String url;
