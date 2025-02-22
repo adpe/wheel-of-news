@@ -36,7 +36,7 @@ docker run -d -p 9000:8080 \
   -e NEWS_API_KEY=$NEWS_API_KEY \
   -e NEWS_FETCH_CRON=$NEWS_FETCH_CRON \
   --name $CONTAINER_NAME_APP \
-  --volumes-from $CONTAINER_NAME_DB \
+  --volumes-from $CONTAINER_NAME_DB:rw \
   $IMAGE_NAME
 
 exit
