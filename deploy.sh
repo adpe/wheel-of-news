@@ -23,8 +23,13 @@ if [ "\$(docker ps -qa -f name=\$CONTAINER_NAME_APP)" ]; then
         docker stop \$CONTAINER_NAME_APP;
     fi
 
-    echo "Removing existing container..."
-    docker rm \$CONTAINER_NAME_APP
+    # Check if the container can be removed (i.e., it exists and is not running)
+    if [ "$(docker ps -qa -f name=$CONTAINER_NAME_APP)" ] && [ ! "$(docker ps -q -f name=$CONTAINER_NAME_APP)" ]; then
+        echo "Container is stopped and can be removed..."
+        docker rm $CONTAINER_NAME_APP
+    else
+        echo "Container cannot be removed (it might still be running or does not exist)."
+    fi
 fi
 
 docker run -d -p 9000:8080 \
