@@ -102,4 +102,4 @@ jobs:
         run: |
           set -e
           chmod +x deploy.sh
-          ./deploy.sh "$SPRING_DATASOURCE_URL" "$SPRING_JPA_SHOW_SQL" "$LOGGING_LEVEL_ORG_HIBERNATE_SQL" "$LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND" "$NEWS_API_KEY" "$NEWS_FETCH_CRON"
+          ./deploy.sh
