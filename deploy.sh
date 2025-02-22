@@ -22,9 +22,12 @@ if [ "\$(docker ps -qa -f name=\$CONTAINER_NAME_APP)" ]; then
         echo "Container is running -> stopping it..."
         docker stop \$CONTAINER_NAME_APP;
     fi
+
+    echo "Removing existing container..."
+    docker rm $CONTAINER_NAME_APP
 fi
 
-docker run -d --rm -p 9000:8080 --name \$CONTAINER_NAME_APP --volumes-from \$CONTAINER_NAME_DB \$IMAGE_NAME
+docker run -d -p 9000:8080 -e SPRING_PROFILES_ACTIVE=prod --name \$CONTAINER_NAME_APP --volumes-from \$CONTAINER_NAME_DB \$IMAGE_NAME
 
 exit
 EOF
