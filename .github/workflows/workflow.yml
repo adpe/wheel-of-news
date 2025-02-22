@@ -93,7 +93,13 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
           SSH_USER: ${{ secrets.SSH_USER }}
+          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+          SPRING_JPA_SHOW_SQL: ${{ secrets.SPRING_JPA_SHOW_SQL }}
+          LOGGING_LEVEL_ORG_HIBERNATE_SQL: ${{ secrets.LOGGING_LEVEL_ORG_HIBERNATE_SQL }}
+          LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND: ${{ secrets.LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          NEWS_FETCH_CRON: ${{ secrets.NEWS_FETCH_CRON }}
         run: |
           set -e
           chmod +x deploy.sh
-          ./deploy.sh
+          ./deploy.sh "$SPRING_DATASOURCE_URL" "$SPRING_JPA_SHOW_SQL" "$LOGGING_LEVEL_ORG_HIBERNATE_SQL" "$LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND" "$NEWS_API_KEY" "$NEWS_FETCH_CRON"
