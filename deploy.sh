@@ -24,7 +24,7 @@ if [ "\$(docker ps -qa -f name=\$CONTAINER_NAME_APP)" ]; then
     fi
 
     echo "Removing existing container..."
-    docker rm $CONTAINER_NAME_APP
+    docker rm \$CONTAINER_NAME_APP
 fi
 
 docker run -d -p 9000:8080 \
@@ -35,7 +35,6 @@ docker run -d -p 9000:8080 \
   -e LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND=$LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND \
   -e NEWS_API_KEY=$NEWS_API_KEY \
   -e NEWS_FETCH_CRON=$NEWS_FETCH_CRON \
-  -e IMAGE_NAME=$IMAGE_NAME \
   --name $CONTAINER_NAME_APP \
   --volumes-from $CONTAINER_NAME_DB \
   $IMAGE_NAME
